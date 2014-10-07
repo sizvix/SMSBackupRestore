@@ -88,7 +88,7 @@ function MessagesBackupRestoreApp() {
     xml += '\t<type>' + message.type + '</type>\n';
     xml += '\t<id>' + message.id + '</id>\n';
     xml += '\t<threadId >' + message.threadId + '</threadId>\n';
-    xml += '\t<body>' + message.body + '</body>\n';
+    xml += '\t<body><![CDATA[' + message.body + ']]></body>\n';
     xml += '\t<delivery>' + message.delivery + '</delivery>\n';
     xml += '\t<read>' + message.read + '</read>\n';
     xml += '\t<receiver>' + message.receiver + '</receiver>\n';
@@ -106,6 +106,7 @@ function MessagesBackupRestoreApp() {
   this.ExportMessages = function(foundSmsCount) {
     
     alert(foundSmsCount + " messages found.\n Start exporting...");
+    messages.unshift('<?xml version="1.0" encoding="UTF-8"?>');
     var oMyBlob = new Blob(messages, { "type" : "text\/xml" }); // the blob
 
     var sdcard = navigator.getDeviceStorage("sdcard");
